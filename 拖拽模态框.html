@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            /* 盒子必须要有定位才能够移动 */
+            position: absolute;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    fdsfdsffdsfdsffdsfdsffdsfdsffdsfdsffdsfdsffdsfdsffdsfdsf
+    fdsfdsffdsfdsffdsfdsffdsfdsffdsfdsffdsfdsffdsfdsffdsfdsf
+    fdsfdsffdsfdsffdsfdsffdsfdsffdsfdsffdsfdsffdsfdsffdsfdsf
+    <div></div>
+    <script>
+        var oDiv = document.querySelector('div');
+        oDiv.onmousedown = function (e) {
+            // 计算鼠标到盒子的距离
+            var disX = e.pageX - this.offsetLeft;
+            var disY = e.pageY - this.offsetTop;
+
+            document.onmousemove = function (e) {
+                // 用鼠标到文档的距离 - 鼠标到盒子的距离
+                oDiv.style.left = e.pageX - disX + 'px';
+                oDiv.style.top = e.pageY - disY + 'px';
+            }
+            document.onmouseup = function () {
+                document.onmousemove = document.onmouseup = null;
+            };
+            // 阻止默认行为，例如防止选中文字
+            return false;
+        };
+    </script>
+</body>
+
+</html>
